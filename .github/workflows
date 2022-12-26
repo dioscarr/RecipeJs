@@ -9,9 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set API key environment variable
-        run: echo "API_KEY=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" >> $GITHUB_ENV
+      - uses: actions/checkout@v2      
       - name: Install dependencies
         run: yarn install
       - name: Build and deploy
