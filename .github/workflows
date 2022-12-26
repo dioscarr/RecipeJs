@@ -9,7 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2      
+      - uses: actions/checkout@v2   
+      - name: Set API key environment variable
+        run: echo "API_KEY=${{ secrets.REACT_APP_API_KEY }}" >> $GITHUB_ENV   
       - name: Install dependencies
         run: yarn install
       - name: Build and deploy
