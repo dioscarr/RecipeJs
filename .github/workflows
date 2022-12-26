@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2   
       - name: Set API key environment variable
-        run: echo "API_KEY=${{ secrets.REACT_APP_API_KEY }}" >> $GITHUB_ENV   
+        run: echo "REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }}" >> $GITHUB_ENV   
       - name: Install dependencies
         run: yarn install
       - name: Build and deploy
