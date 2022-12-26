@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set API key environment variable
-        run: echo "API_KEY=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" >> $GITHUB_ENV
+        run: echo "API_KEY=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" >> $GITHUB_ENV
       - name: Install dependencies
         run: yarn install
       - name: Build and deploy
