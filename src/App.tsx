@@ -14,9 +14,9 @@ function App() {
         <Grid item xs={12}>
           <RecipeForm/>  
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
          <Chatui/>
-        </Grid>
+        </Grid> */}
        
       </Grid>
     </div>

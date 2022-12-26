@@ -26,7 +26,24 @@ interface Recipe {
   ingredients: string[];
   instructions: string[];
 }
-const allowedLanguages = ['csharp','arcade','javaScript', 'python', 'c','c++', 'java', 'c#', 'php', 'ruby', 'go', 'swift', 'rust','sql','mysql'];
+const allowedLanguages = [
+  'abnf',
+  'csharp',
+  'arcade', 
+  'javaScript', 
+  'python', 
+  'c', 
+  'c++', 
+  'java', 
+  'c#', 
+  'php', 
+  'ruby', 
+  'go', 
+  'swift', 
+  'rust', 
+  'sql', 
+  'mysql'
+];
 interface message {
   q: string,
   text: string
@@ -50,14 +67,14 @@ const RecipeForm: React.FC = () => {
         prompt: `${input}`,
         model: "text-davinci-003",
         temperature: 0.7,
-        max_tokens: 2000,
+        max_tokens: 500,
         top_p: 1,
         frequency_penalty: 0,
         presence_penalty: 0,
       }, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer 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`,
+          'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`,
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
           'Access-Control-Allow-Headers': 'Content-Type',

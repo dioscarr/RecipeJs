@@ -1,6 +1,6 @@
 {
   "name": "recipe",
-  "homepage":"RecipeJs",
+  "homepage": "RecipeJs",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,6 +21,7 @@
     "@types/styled-components": "^5.1.26",
     "axios": "^1.2.1",
     "chatgpt": "^3.3.2",
+    "dotenv": "^16.0.3",
     "gh-pages": "^4.0.0",
     "highlight.js": "^11.7.0",
     "prismjs": "^1.29.0",
