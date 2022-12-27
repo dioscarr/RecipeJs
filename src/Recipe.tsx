@@ -27,6 +27,12 @@ interface Recipe {
   instructions: string[];
 }
 const allowedLanguages = [
+  
+  'less',
+  'coffeescript',
+  'bash',
+ 'awk',
+'css','html',  'cpp',
   'abnf',
   'csharp',
   'arcade', 
@@ -63,25 +69,12 @@ const RecipeForm: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://api.openai.com/v1/completions', {
-        prompt: `${input}`,
-        model: "text-davinci-003",
-        temperature: 0.7,
-        max_tokens: 500,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`,
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        },
+      const response = await axios.post('https://recipexerver.onrender.com/openai', {
+        input: `${input}`,
+     
       });
-      setMessages([...messages, { q: input, text: response.data.choices[0].text }])
-      const detectedLanguage = hljs.highlightAuto(response.data.choices[0].text).language;
+      setMessages([...messages, { q: input, text: response.data}])
+      const detectedLanguage = hljs.highlightAuto(response.data).language;
         if(detectedLanguage!==undefined)
           setLanguage(detectedLanguage);
        
@@ -104,40 +97,43 @@ const RecipeForm: React.FC = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 3000);
   };
+
+  
   return (
     <Container maxWidth="lg" style={{marginTop:30}} >
       
-        <AppBar position="static" style={{backgroundColor:'#fcfcfc'}}>
+        <AppBar position="static" style={{backgroundColor:'#532c2c14'}}>
          <Toolbar variant="dense"> 
          
-          <Typography variant="h6" style={{color:'#735a2e'}}> Home Recipe <Badge>{messages.length}</Badge><Badge>{language}</Badge> </Typography> 
+          <Typography variant="h6" style={{color:'#532c2c'}}> Home Recipe <Badge>{messages.length}</Badge> <Badge>{language}</Badge> </Typography> 
          </Toolbar> 
         </AppBar>
       
-      <Paper className="ChatMain" style={{ height: '70vh',maxHeight:'70vh', overflowY:'scroll',padding:'15px', backgroundColor:'#ffffff',
+      <Paper className="ChatMain" style={{ height: '70vh',maxHeight:'70vh', overflowY:'scroll',padding:'15px', backgroundColor:'#532c2c',
        
      }}>
       {messages.length>0 && (
-        <List>
+        <List >
           {messages.map((message, index) => (
-            <Paper key={index} style={{ display: 'grid', rowGap: 10, backgroundColor:'#ffdad6' }}>
+            <Paper key={index} style={{ display: 'grid', rowGap: 10, backgroundColor:'#ffffff' }}>
              
               
-              <Typography style={{fontWeight:'bolder',color:'#532c2c'}}>{message.q}</Typography>            
+              <Typography style={{fontWeight:'bolder',color:'#532c2c', maxWidth:'100%',  overflowWrap: 'break-word' }}>{message.q}</Typography>            
  
-              <Paper style={{backgroundColor:'#ffedea'}}>
+              <Paper style={{backgroundColor:'#ffffff'}}>
             
                 <ListItem >
                   <ListItemText style={{color:'#532c2c'}} >
                   { hljs.highlightAuto(message.text).language !== undefined && allowedLanguages.includes(hljs.highlightAuto(message.text)?.language??"") ? (
-                    <SyntaxHighlighter  language={undefined} style={vscDarkPlus} >
-                    {message.text}
+                   <div style={{maxWidth:'100%',overflowWrap: 'break-word'}}> <SyntaxHighlighter  language={undefined} style={vscDarkPlus} >
+                    {`${message.text}`}
                     </SyntaxHighlighter>
+                    </div>
                     ) : (
-                    <pre>{message.text}</pre>
+                      <div style={{overflowWrap: 'break-word'}}>{message.text}</div>
                     )
                   }
-                <CopyToClipboard text={message.text} onCopy={handleCopy}>
+                <CopyToClipboard text={`${message.text}`} onCopy={handleCopy}>
                     <button>{copied ? 'Copied!' : 'Copy'}</button>
                 </CopyToClipboard>
                               
