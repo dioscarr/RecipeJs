@@ -22,6 +22,7 @@ import {
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import Typist from 'react-typist';
 interface Recipe {
   ingredients: string[];
   instructions: string[];
@@ -300,12 +301,18 @@ const RecipeForm: React.FC = () => {
                 <ListItem >
                   <ListItemText style={{color:'#532c2c'}} >
                   { hljs.highlightAuto(message.text).language !== undefined && allowedLanguages.includes(hljs.highlightAuto(message.text)?.language??"") ? (
-                   <div style={{maxWidth:'100%',overflowWrap: 'break-word'}}> <SyntaxHighlighter  language={undefined} style={vscDarkPlus} >
+                   <div style={{maxWidth:'100%',overflowWrap: 'break-word'}}>
+
+                <Typist>
+     
+                     <SyntaxHighlighter  language={undefined} style={vscDarkPlus} >
                     {`${message.text}`}
                     </SyntaxHighlighter>
+                   
+                </Typist>
                     </div>
                     ) : (
-                      <div style={{overflowWrap: 'break-word'}}>{message.text}</div>
+                      <Typist><div style={{overflowWrap: 'break-word'}}>{message.text}</div> </Typist>
                     )
                   }
                 <CopyToClipboard text={`${message.text}`} onCopy={handleCopy}>
