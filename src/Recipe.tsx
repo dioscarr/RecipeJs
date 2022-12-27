@@ -69,7 +69,8 @@ const RecipeForm: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://recipexerver.onrender.com/openai', {
+      const response = await axios.post('http://localhost:3000/openai', {
+      // const response = await axios.post('https://recipexerver.onrender.com/openai', {
         input: `${input}`,
      
       });
