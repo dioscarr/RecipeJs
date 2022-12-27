@@ -27,7 +27,39 @@ interface Recipe {
   instructions: string[];
 }
 const allowedLanguages = [
-  
+"fortran",
+"prolog",
+"pascal",
+"pl/i",
+
+"bash",
+
+"rust",
+"common lisp",
+"erlang",
+
+"scala",
+"haskell",
+"perl",
+"czech",
+"smalltalk",
+"red",
+"fortress",
+"scheme",
+"coffeescript",
+"f#",
+"julia",
+"elixir",
+"livescript",
+"elm",
+"hack",
+"swift",
+"clojure",
+"groovy",
+"ocaml",
+"cobol",
+  'ada',
+  'lisp',
   'less',
   'coffeescript',
   'bash',
@@ -89,10 +121,7 @@ const RecipeForm: React.FC = () => {
   const clearMessages = () => {
     setMessages([])
   }
-  
-
-
- 
+   
 
   const handleCopy = () => {
     setCopied(true);
