@@ -276,7 +276,7 @@ const RecipeForm: React.FC = () => {
 
   
   return (
-    <Container maxWidth="lg" style={{marginTop:30}} >
+    <div  style={{marginTop:30}} >
       
         <AppBar position="static" style={{backgroundColor:'#532c2c14'}}>
          <Toolbar variant="dense"> 
@@ -285,9 +285,7 @@ const RecipeForm: React.FC = () => {
          </Toolbar> 
         </AppBar>
       
-      <Paper className="ChatMain" style={{ height: '70vh',maxHeight:'70vh', overflowY:'scroll',padding:'15px', backgroundColor:'#532c2c',
-       
-     }}>
+      <Paper className="ChatMain" style={{ height: '70vh',maxHeight:'70vh', overflowY:'scroll',padding:'15px', backgroundColor:'#ffffff',}}>
       {messages.length>0 && (
         <List >
           {messages.map((message, index) => (
@@ -303,16 +301,16 @@ const RecipeForm: React.FC = () => {
                   { hljs.highlightAuto(message.text).language !== undefined && allowedLanguages.includes(hljs.highlightAuto(message.text)?.language??"") ? (
                    <div style={{maxWidth:'100%',overflowWrap: 'break-word'}}>
 
-                <Typist>
+               
+                     {/* <SyntaxHighlighter  language={undefined} style={vscDarkPlus} > */}
      
-                     <SyntaxHighlighter  language={undefined} style={vscDarkPlus} >
                     {`${message.text}`}
-                    </SyntaxHighlighter>
+                    {/* </SyntaxHighlighter> */}
                    
-                </Typist>
+               
                     </div>
                     ) : (
-                      <Typist><div style={{overflowWrap: 'break-word'}}>{message.text}</div> </Typist>
+                     <div style={{overflowWrap: 'break-word'}}>{message.text}</div> 
                     )
                   }
                 <CopyToClipboard text={`${message.text}`} onCopy={handleCopy}>
@@ -341,7 +339,7 @@ const RecipeForm: React.FC = () => {
       <Button onClick={clearMessages} variant="contained" color="secondary">
         Clear
       </Button>
-    </Container>
+    </div>
   );
 };
 
