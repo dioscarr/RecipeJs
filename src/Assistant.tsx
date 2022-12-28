@@ -25,6 +25,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import Typist from "react-typist";
 import UserIcon from "./user-icon.svg"; // Add user icon image
 import AssistantIcon from "./assistant-icon.svg"; // Add assistant icon image
+import { BorderAllRounded } from "@mui/icons-material";
 
 interface Recipe {
   ingredients: string[];
@@ -38,6 +39,7 @@ interface message {
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -67,6 +69,11 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     borderRadius:'22px !important',
     marginRight: theme.spacing(0),
+    '& .MuiOutlinedInput-input': {
+      
+      width:'92%',
+      borderRadius:'10px'
+    },
    
   },
   button: {
@@ -228,11 +235,13 @@ const ChatUI: React.FC = () => {
       <form className={classes.form} onSubmit={handleSubmit}>
        <div className={classes.bottombar}> <TextField
        InputProps={{
+        
         style: {
           borderRadius: '22px',
-         backgroundColor:'#fbf9ff',
+          backgroundColor:'#fbf9ff',
           display:'grid',
-          justifySelf:'center'
+          justifySelf:'center',
+          width:'98%'
 
         },
       }}
