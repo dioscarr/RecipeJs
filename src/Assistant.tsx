@@ -5,6 +5,8 @@ import "./Recipe.css";
 import hljs from "highlight.js";
 import styled from "styled-components";
 import allowedLanguages from './allowedLanguages.js'
+import { CircularProgress } from "@material-ui/core";
+
 
 import {
   AppBar,
@@ -90,31 +92,37 @@ const useStyles = makeStyles((theme) => ({
 
 const ChatUI: React.FC = () => {
   const classes = useStyles();
-  const [input, setRecipePrompt] = useState("");
+  const [input, setInput] = useState("");
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [messages, setMessages] = useState<message[]>([]);
   const [copied, setCopied] = useState(false);
   const [language, setLanguage] = useState<string>("");
   const [isCode, setIsCode] = useState(false);
+  const [loading, setLoading] = useState(true);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRecipePrompt(e.target.value);
+    setInput(e.target.value);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     try {
-      // const response = await axios.post('http://localhost:3000/openai', {
-      const response = await axios.post("https://recipexerver.onrender.com/openai",
+      if(input !=="")
+      {
+        setLoading(true);
+        setInput("");
+        // const response = await axios.post('http://localhost:3000/openai', {
+        const response = await axios.post("https://recipexerver.onrender.com/openai",
         {
-          input: `${input}`,
+        input: `${input}`,
         }
-      );
-      setMessages([...messages, { q: input, text: response.data }]);
-      const detectedLanguage = hljs.highlightAuto(response.data).language;
-      if (detectedLanguage !== undefined) setLanguage(detectedLanguage);
+        );
+        setMessages([...messages, { q: input, text: response.data }]);
+        const detectedLanguage = hljs.highlightAuto(response.data).language;
+        if (detectedLanguage !== undefined) setLanguage(detectedLanguage);
 
-      setRecipePrompt("");
+        setLoading(false);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -228,7 +236,9 @@ const ChatUI: React.FC = () => {
                 {/* </SyntaxHighlighter> */}
               </Paper>
             </>
-            ))}
+            ))
+          }
+            {loading&&(<div className="dot-elastic"></div>)}
           </List>
         )}
       </Paper>
